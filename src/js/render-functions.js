@@ -33,12 +33,14 @@ const markup = images.map((image) =>
 
 export function clearGallery(){
     const list = document.querySelector('.gallery');
-    list.innerHTML = '';
+    if (list) {
+        list.innerHTML = '';
+    }
 }
 
 export function showLoader() {
     const containerLoader = document.querySelector(".container-loader span");
-    if (!containerLoader.classList.contains("loader")) {
+    if (containerLoader && !containerLoader.classList.contains("loader")) {
         containerLoader.classList.add("loader");
     };
     
@@ -46,7 +48,7 @@ export function showLoader() {
 
 export function hideLoader() {
     const containerLoader = document.querySelector(".container-loader span");
-    if (containerLoader.classList.contains("loader")) {
+    if (containerLoader && containerLoader.classList.contains("loader")) {
         containerLoader.classList.remove("loader");
     };
 }
