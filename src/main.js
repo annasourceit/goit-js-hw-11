@@ -23,6 +23,7 @@ form.addEventListener('submit', (event) => {
                     const image = {
                         webformatURL: data.webformatURL,
                         largeImageURL:  data.largeImageURL, 
+                        //description: data.description, 
                         tags: data.tags,
                         likes: data.likes,
                         views: data.views,
