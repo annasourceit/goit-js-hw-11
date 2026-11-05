@@ -1,8 +1,13 @@
 import SimpleLightbox from "simplelightbox";
+let gallery = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionsData: 'alt',
+    captionDelay: 250,
+});
 
 export function createGallery(images) {
-const list = document.querySelector('.gallery');
-const markup = images.map((image) =>
+    const list = document.querySelector('.gallery');
+    const markup = images.map((image) =>
 
     `<li class = "gallery-item">
         <a class = "gallery-link" href = "${image.largeImageURL}">
@@ -22,12 +27,7 @@ const markup = images.map((image) =>
     </li>`).join('');
 
     list.insertAdjacentHTML('beforeend', markup);
-
-    let gallery = new SimpleLightbox('.gallery a', {
-        captions: true,
-        captionsData: 'alt',
-        captionDelay: 250,
-    });
+    
     gallery.refresh(); 
 }
 
