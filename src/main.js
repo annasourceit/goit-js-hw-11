@@ -12,18 +12,18 @@ form.addEventListener('submit', (event) => {
     clearGallery();
     const formData = new FormData(form);
     const query = formData.get('search-text').trim();
-    showLoader();
     if (query) {
+        showLoader();
         getImagesByQuery(query)
         .then(response => {           
-            const datas = response.data.hits;           
+            const datas = response.hits;           
             if (datas.length > 0) { 
                 let arrImages = [];
                 for (const data of datas) {
                     const image = {
-                        preview: data.webformatURL,
-                        original:  data.largeImageURL, 
-                        description: data.description, 
+                        webformatURL: data.webformatURL,
+                        largeImageURL:  data.largeImageURL, 
+                        //description: data.description, 
                         tags: data.tags,
                         likes: data.likes,
                         views: data.views,
@@ -41,13 +41,29 @@ form.addEventListener('submit', (event) => {
                     message: 'Sorry, there are no images matching your search query. Please try again!',
                     position: 'topRight',
                     transitionIn: 'fadeInDown'
-                }); 
-            } 
-            hideLoader();
+                });
+            }
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            iziToast.error({
+                id: 'error',
+                title: 'Error',
+                message: error,
+                position: 'topRight',
+                transitionIn: 'fadeInDown'
+            });
+        })
+        .finally(() => {
+            hideLoader()
+        });
     } else {
-        alert('Fill please all fields');
+        iziToast.error({
+            id: 'error',
+            title: 'Error',
+            message: 'Fill please all fields',
+            position: 'topRight',
+            transitionIn: 'fadeInDown'
+        });
     }
 })
 

@@ -5,12 +5,12 @@ const list = document.querySelector('.gallery');
 const markup = images.map((image) =>
 
     `<li class = "gallery-item">
-        <a class = "gallery-link" href = "${image.original}">
+        <a class = "gallery-link" href = "${image.largeImageURL}">
             <img
             class = "gallery-image"
-            src = "${image.preview}"
-            data-source = "${image.original}"
-            alt = "${image.description}"
+            src = "${image.webformatURL}"
+            data-source = "${image.largeImageURL}"
+            alt = "${image.tags}"
             />        
         </a>
          <ul class = "gallery-textcontainer">
